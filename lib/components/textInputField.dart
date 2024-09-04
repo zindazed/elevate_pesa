@@ -1,3 +1,4 @@
+import 'package:elevate_pesa/Global/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextInput extends StatelessWidget {
@@ -29,7 +30,7 @@ class CustomTextInput extends StatelessWidget {
       this.isObscure = false,
       this.fillColor = const Color(0xFFF5F5F5),
       this.enabledBorderColor = const Color(0xFFE0E0E0),
-      this.focusedBorderColor = Colors.blue,
+      this.focusedBorderColor = primaryColor,
       this.borderRadius = const BorderRadius.all(Radius.circular(10.0)),
       this.validator,
       this.isObscureToggle,

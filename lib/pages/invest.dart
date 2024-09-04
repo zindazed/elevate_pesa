@@ -242,13 +242,13 @@ class InvestmentTile extends StatelessWidget {
     return Container(
       color: Colors.white,
       // height: MediaQuery.of(context).size.height * 0.5,
-      height: 350,
+      height: 380,
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            // flex: 2,
+            flex: 2,
             child: ImageFadeShow(
               imageUrls: investment.images,
             ),

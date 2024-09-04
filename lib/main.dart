@@ -1,26 +1,45 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:elevate_pesa/Global/colors.dart';
+import 'package:elevate_pesa/pages/explore.dart';
 import 'package:elevate_pesa/pages/home.dart';
+import 'package:elevate_pesa/pages/profile.dart';
+import 'package:elevate_pesa/pages/signin.dart';
+import 'package:elevate_pesa/pages/signup.dart';
 import 'package:elevate_pesa/pages/stats.dart';
 import 'package:elevate_pesa/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = false;
+    Future<void> getLoginStatus() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        isLoggedIn = prefs.containsKey("user");
+      });
+    }
+
     return MaterialApp(
       title: 'Animated Notch Bottom Bar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: isLoggedIn ? MyHomePage() : SignInScreen(),
     );
   }
 }
@@ -67,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final List<Widget> bottomBarPages = [
       HomePage(),
       StatsPage(),
-      Page3(),
-      Page4(),
+      ExplorePage(),
+      ProfilePage(),
     ];
     return Scaffold(
       key: _scaffoldKey,
@@ -76,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Good Morning'),
         centerTitle: true,
         backgroundColor: primaryColor,
+        foregroundColor: secondColor,
         actions: <Widget>[
           IconButton(
             iconSize: 50,
@@ -190,25 +210,5 @@ class Page1 extends StatelessWidget {
         child: Text('Page 1'),
       ),
     );
-  }
-}
-
-class Page3 extends StatelessWidget {
-  Page3({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white, child: Center(child: Text('Explore Page')));
-  }
-}
-
-class Page4 extends StatelessWidget {
-  Page4({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white, child: Center(child: Text('Profile Page')));
   }
 }
