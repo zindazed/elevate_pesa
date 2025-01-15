@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:elevate_pesa/Global/colors.dart';
 import 'package:elevate_pesa/components/notify.dart';
 import 'package:elevate_pesa/components/textInputField.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 class BillsPage extends StatefulWidget {
   BillsPage({Key? key}) : super(key: key);
@@ -162,38 +165,50 @@ class _BillsPageState extends State<BillsPage> {
                           backgroundColor: primaryColor,
                         ),
                         onPressed: () async {
-                          FocusScope.of(context).unfocus();
-                          if (_formKey.currentState!.validate()) {
-                            if (((creditType == "Business Credit") &&
-                                    int.parse(_amountController.text) <=
-                                        50000) ||
-                                ((creditType == "Investment Credit") &&
-                                    int.parse(_amountController.text) <=
-                                        12000)) {
-                              popUp(
-                                  context: context,
-                                  icon: Icons.check_box,
-                                  message:
-                                      "You have successfully borrowed UGX ${NumberFormat('#,###').format((int.parse(_amountController.text)))}",
-                                  bColor: Colors.green,
-                                  tColor: Colors.white);
-                            } else {
-                              popUp(
-                                  context: context,
-                                  icon: Icons.info,
-                                  message:
-                                      "The entered amount exceeds the credit limit",
-                                  bColor: Colors.amber,
-                                  tColor: Colors.white);
-                            }
-                          } else {
-                            popUp(
-                                context: context,
-                                icon: Icons.info,
-                                message: "Please fill the empty fields",
-                                bColor: Colors.amber,
-                                tColor: Colors.white);
-                          }
+                          // FocusScope.of(context).unfocus();
+                          // if (_formKey.currentState!.validate()) {
+                          //   if (((creditType == "Business Credit") &&
+                          //           int.parse(_amountController.text) <=
+                          //               50000) ||
+                          //       ((creditType == "Investment Credit") &&
+                          //           int.parse(_amountController.text) <=
+                          //               12000)) {
+                          //     final response = await http.post(
+                          //       Uri.parse('http://$host:8000/api/credit'),
+                          //       body: jsonEncode({
+                          //         "creditType": creditType,
+                          //         "amount": _amountController.text,
+                          //         "phone": _phoneController.text
+                          //       }),
+                          //       headers: {
+                          //         'Content-Type': 'application/json',
+                          //         'Accept': 'application/json'
+                          //       },
+                          //     );
+                          //     popUp(
+                          //         context: context,
+                          //         icon: Icons.check_box,
+                          //         message:
+                          //             "You have successfully borrowed UGX ${NumberFormat('#,###').format((int.parse(_amountController.text)))}",
+                          //         bColor: Colors.green,
+                          //         tColor: Colors.white);
+                          //   } else {
+                          //     popUp(
+                          //         context: context,
+                          //         icon: Icons.info,
+                          //         message:
+                          //             "The entered amount exceeds the credit limit",
+                          //         bColor: Colors.amber,
+                          //         tColor: Colors.white);
+                          //   }
+                          // } else {
+                          //   popUp(
+                          //       context: context,
+                          //       icon: Icons.info,
+                          //       message: "Please fill the empty fields",
+                          //       bColor: Colors.amber,
+                          //       tColor: Colors.white);
+                          // }
                         },
                         child: Text(
                           "Borrow",

@@ -42,6 +42,7 @@ dependencies:
   fl_chart: ^0.68.0
   shared_preferences: ^2.2.3
   url_launcher: ^6.0.20
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

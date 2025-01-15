@@ -189,6 +189,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 // log('current selected index $index');
                 _pageController.jumpToPage(index);
               },
+              kIconSize: 20.0,
+              kBottomRadius: 10.0,
             )
           : null,
     );
